@@ -22,3 +22,5 @@ go.work.sum
 .env
 
 .null-ls*
+tmp/
+compose.yml

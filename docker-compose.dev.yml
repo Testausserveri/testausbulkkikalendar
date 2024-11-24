@@ -1,0 +1,11 @@
+services:
+  app:
+    container_name: testausbulkkikalendar
+    image: cosmtrek/air
+    working_dir: /app
+    environment:
+      PORT: 8080
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./:/app
