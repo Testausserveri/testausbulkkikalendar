@@ -5,13 +5,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{.Title}}</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+    {{ template "imports" . }}
 </head>
 
 <body>
-    <h1>{{.Title}}</h1>
-    {{ if not .IsAuth }}
-    <a href="{{.AuthUrl}}">Login</a>
-    {{ end }}
+    {{ if not .IsAuth }} {{ template "login" . }} {{ end }}
 </body>
 
 </html>

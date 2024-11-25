@@ -1,0 +1,10 @@
+{{ define "login" }}
+<div class="mx-auto w-min h-full flex flex-col justify-center items-center text-center gap-4">
+    <h1>{{ .Title }}</h1>
+    <p>You need to authenticate with Google to edit calendar events.</p>
+    <a class="px-4 font-bold py-2 border-gray-100 border-2 rounded flex items-center gap-4" href="{{.AuthUrl}}">
+        <i class="fa-brands fa-google"></i>
+        Login
+    </a>
+</div>
+{{ end }}

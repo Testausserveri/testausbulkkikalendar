@@ -12,7 +12,14 @@ func main() {
 	oauth.Init()
 
 	// Parse all templates in the templates directory
-	handlers.Init("templates/*.html")
+	handlers.Init("./templates")
+
+	// Create a file server handler
+	fs := http.FileServer(http.Dir(constants.STATIC_CONTENT))
+
+	// Strip the prefix if needed and serve files
+	http.Handle("/static/", http.StripPrefix("/static/", fs))
+
 	// Define the handlers
 	http.HandleFunc("/", handlers.Index)
 

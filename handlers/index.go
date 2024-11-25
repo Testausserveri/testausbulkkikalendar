@@ -3,18 +3,9 @@ package handlers
 import (
 	"encoding/base64"
 	"encoding/json"
-	"fmt"
-	"html/template"
 	"net/http"
 	"testausserveri/testausbulkkikalendar/oauth"
 )
-
-// Also init templates for use in handlers package
-var templates *template.Template
-
-func Init(templateGlob string) {
-	templates = template.Must(template.ParseGlob(templateGlob))
-}
 
 // Index site handler
 func Index(w http.ResponseWriter, r *http.Request) {
@@ -22,7 +13,6 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	// Callback "URL" from Google auth
 	if state == "state-token" {
 		code := r.URL.Query().Get("code")
-		fmt.Println(code)
 		authToken, err := oauth.GetTokenFromCode(code)
 		if err != nil {
 			http.Error(w, "Error retrieving auth token", http.StatusInternalServerError)
