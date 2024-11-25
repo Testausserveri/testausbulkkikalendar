@@ -24,3 +24,6 @@ go.work.sum
 .null-ls*
 tmp/
 compose.yml
+secrets/
+node_modules
+package-lock.json
