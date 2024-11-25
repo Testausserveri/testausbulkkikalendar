@@ -1,0 +1,32 @@
+{{ define "query" }}
+<form class="flex flex-col gap-2 w-fit">
+    <div class="input-group">
+        <input type="text" name="query" id="searchQuery" placeholder=" " />
+        <label for="searchQuery">Search term</label>
+    </div>
+    <div class="input-group">
+        <input
+            type="date"
+            name="dateStart"
+            id="searchDateStart"
+            placeholder=" "
+        />
+        <label for="searchDateStart">Start date</label>
+    </div>
+    <div class="input-group">
+        <input type="date" name="dateEnd" id="searchDateEnd" placeholder=" " />
+        <label for="searchDateEnd">End date</label>
+    </div>
+    <div class="input-group">
+        <input
+            type="number"
+            name="maxResults"
+            id="searchMaxResults"
+            placeholder=" "
+            value="1000"
+        />
+        <label for="searchMaxResults">Result count</label>
+    </div>
+    <button type="submit">Search</button>
+</form>
+{{ end }}

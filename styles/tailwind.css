@@ -38,10 +38,38 @@ h4 {
 }
 
 h5 {
-    @apply text-xl;
+    @apply text-lg;
 }
 
 p,
 a {
-    @apply text-lg;
+    @apply text-base;
+}
+
+.input-group {
+    @apply relative;
+}
+
+.input-group input {
+    @apply text-base px-1 pt-5 pb-2 block w-52 border-0 border-b-2 border-b-gray-100 bg-transparent;
+}
+
+.input-group input:focus {
+    @apply outline-none;
+}
+
+.input-group input:placeholder-shown~label {
+    @apply top-5 text-gray-100 text-base;
+}
+
+.input-group label {
+    @apply text-gray-300 top-0 text-sm absolute left-1 transition-all ease-in-out;
+}
+
+.input-group input:focus~label {
+    @apply top-0 text-sm text-gray-300;
+}
+
+button[type='submit'] {
+    @apply w-fit border border-gray-300 rounded px-2 py-1 self-end mt-2 text-base;
 }

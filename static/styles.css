@@ -567,6 +567,11 @@ video {
   height: 100%;
 }
 
+.w-fit {
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
 .w-min {
   width: -moz-min-content;
   width: min-content;
@@ -584,12 +589,20 @@ video {
   justify-content: center;
 }
 
+.gap-2 {
+  gap: 0.5rem;
+}
+
 .gap-4 {
   gap: 1rem;
 }
 
 .rounded {
   border-radius: 0.25rem;
+}
+
+.border {
+  border-width: 1px;
 }
 
 .border-2 {
@@ -665,12 +678,91 @@ h4 {
 }
 
 h5 {
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   line-height: 1.75rem;
 }
 
 p,
 a {
-  font-size: 1.125rem;
-  line-height: 1.75rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.input-group {
+  position: relative;
+}
+
+.input-group input {
+  display: block;
+  width: 13rem;
+  border-width: 0px;
+  border-bottom-width: 2px;
+  --tw-border-opacity: 1;
+  border-bottom-color: rgb(243 244 246 / var(--tw-border-opacity, 1));
+  background-color: transparent;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  padding-top: 1.25rem;
+  padding-bottom: 0.5rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.input-group input:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.input-group input:-moz-placeholder-shown~label {
+  top: 1.25rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  --tw-text-opacity: 1;
+  color: rgb(243 244 246 / var(--tw-text-opacity, 1));
+}
+
+.input-group input:placeholder-shown~label {
+  top: 1.25rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  --tw-text-opacity: 1;
+  color: rgb(243 244 246 / var(--tw-text-opacity, 1));
+}
+
+.input-group label {
+  position: absolute;
+  top: 0px;
+  left: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  --tw-text-opacity: 1;
+  color: rgb(209 213 219 / var(--tw-text-opacity, 1));
+  transition-property: all;
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.input-group input:focus~label {
+  top: 0px;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  --tw-text-opacity: 1;
+  color: rgb(209 213 219 / var(--tw-text-opacity, 1));
+}
+
+button[type='submit'] {
+  margin-top: 0.5rem;
+  width: -moz-fit-content;
+  width: fit-content;
+  align-self: flex-end;
+  border-radius: 0.25rem;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(209 213 219 / var(--tw-border-opacity, 1));
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
 }
