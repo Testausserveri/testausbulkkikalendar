@@ -21,7 +21,8 @@ func main() {
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 
 	// Define the handlers
-	http.HandleFunc("/", handlers.Index)
+	http.Handle("/", handlers.AuthCheck(http.HandlerFunc(handlers.Index)))
+	http.HandleFunc("/query", handlers.Index)
 
 	// Start the server
 	log.Println("Server listening on :" + constants.PORT)

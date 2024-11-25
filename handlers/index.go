@@ -5,6 +5,8 @@ import (
 	"encoding/json"
 	"net/http"
 	"testausserveri/testausbulkkikalendar/oauth"
+
+	"golang.org/x/oauth2"
 )
 
 // Index site handler
@@ -42,32 +44,25 @@ func Index(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	cookie, err := r.Cookie("auth-token")
-	if err != nil {
-		if err != http.ErrNoCookie {
-			// Other errors
-			http.Error(w, "Error retrieving cookie", http.StatusInternalServerError)
-			return
-		}
-	}
-
-	var isAuthenticated bool
-	var authUrl string
-	if cookie == nil {
-		isAuthenticated = false
-		authUrl = oauth.GetAuthURL()
+	// Get authentication attributes
+	var authURL string
+	authToken := &oauth2.Token{}
+	if authValues, ok := r.Context().Value("auth").(*AuthContext); ok {
+		authToken = authValues.AuthToken
+		authURL = authValues.AuthURL
 	} else {
-		isAuthenticated = true
+		w.Write([]byte("Attributes not found"))
+		return
 	}
 
 	data := struct {
 		Title   string
 		IsAuth  bool
-		AuthUrl string
+		AuthURL string
 	}{
 		Title:   "Testausbulkkikalendar",
-		IsAuth:  isAuthenticated,
-		AuthUrl: authUrl,
+		IsAuth:  authToken.Valid(),
+		AuthURL: authURL,
 	}
 
 	// Render the "index.html" template
