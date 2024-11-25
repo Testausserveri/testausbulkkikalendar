@@ -10,7 +10,8 @@
 </head>
 
 <body>
-    {{ if not .IsAuth }} {{ template "login" . }} {{ end }}
+    {{ if not .IsAuth }} {{ template "login" . }} {{ end }} {{ if .IsAuth }}
+    {{ template "query" . }} {{ end }}
 </body>
 
 </html>
