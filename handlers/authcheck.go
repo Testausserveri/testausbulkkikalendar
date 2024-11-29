@@ -5,7 +5,7 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"net/http"
-	"testausserveri/testausbulkkikalendar/oauth"
+	"testausserveri/testausbulkkikalendar/gcal"
 
 	"golang.org/x/oauth2"
 )
@@ -15,6 +15,7 @@ type AuthContext struct {
 	AuthURL   string
 }
 
+// Introduce auth values to the request context
 func AuthCheck(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		cookie, err := r.Cookie("auth-token")
@@ -29,7 +30,7 @@ func AuthCheck(next http.Handler) http.Handler {
 		authToken := &oauth2.Token{}
 		var authURL string
 		if cookie == nil {
-			authURL = oauth.GetAuthURL()
+			authURL = gcal.GetAuthURL()
 		} else {
 			// Decode the string
 			decodedToken, err := base64.StdEncoding.DecodeString(cookie.Value)
@@ -39,7 +40,6 @@ func AuthCheck(next http.Handler) http.Handler {
 			}
 			json.Unmarshal(decodedToken, authToken)
 		}
-
 		// Add an attribute to the context
 		ctx := context.WithValue(r.Context(), "auth", &AuthContext{authToken, authURL})
 		// Create a new request with the updated context

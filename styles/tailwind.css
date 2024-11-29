@@ -51,7 +51,7 @@ a {
 }
 
 .input-group input {
-    @apply text-base px-1 pt-5 pb-2 block w-52 border-0 border-b-2 border-b-gray-100 bg-transparent;
+    @apply text-base px-1 pt-5 pb-2 block w-52 border-b-2 border-b-gray-100 bg-transparent;
 }
 
 .input-group input:focus {

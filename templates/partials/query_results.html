@@ -1,0 +1,8 @@
+{{ define "query_results" }}
+<ul>
+    {{ range .Events }}
+    <li>{{.Summary }}</li>
+    {{end}}
+</ul>
+
+{{ end }}

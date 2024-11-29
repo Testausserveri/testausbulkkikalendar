@@ -1,5 +1,23 @@
 {{ define "query" }}
-<form class="flex flex-col gap-2 w-fit">
+<form
+    class="flex flex-col gap-1 w-fit"
+    hx-post="/query"
+    hx-target="#search-results"
+    hx-swap="innerHTML"
+>
+    <div class="input-group">
+        <select
+            id="calendars"
+            name="calendar"
+            required
+            class="px-1 pt-5 pb-2 block w-52 border-0 border-b-2 border-b-gray-100 bg-transparent text-white text-ellipsis"
+        >
+            > {{range .}}
+            <option value="{{.Id}}">{{.Summary}}</option>
+            {{end}}
+        </select>
+        <label for="calendars">Select calendar</label>
+    </div>
     <div class="input-group">
         <input type="text" name="query" id="searchQuery" placeholder=" " />
         <label for="searchQuery">Search term</label>

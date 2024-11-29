@@ -11,7 +11,11 @@
 
 <body>
     {{ if not .IsAuth }} {{ template "login" . }} {{ end }} {{ if .IsAuth }}
-    {{ template "query" . }} {{ end }}
+    <div class="flex gap-4">
+        {{ template "query_form" .Calendars }}
+        <div id="search-results"></div>
+    </div>
+    {{ end }}
 </body>
 
 </html>

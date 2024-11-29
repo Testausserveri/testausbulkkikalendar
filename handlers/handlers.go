@@ -23,13 +23,10 @@ func parseTemplates(root string) *template.Template {
 				log.Println(err)
 			}
 		}
-
 		return err
 	})
 	if err != nil {
 		panic(err)
 	}
-
-	// Parse all the template files
 	return templ
 }

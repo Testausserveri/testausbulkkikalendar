@@ -3,19 +3,21 @@ package handlers
 import (
 	"encoding/base64"
 	"encoding/json"
+	"fmt"
 	"net/http"
-	"testausserveri/testausbulkkikalendar/oauth"
+	"testausserveri/testausbulkkikalendar/gcal"
 
 	"golang.org/x/oauth2"
+	"google.golang.org/api/calendar/v3"
 )
 
-// Index site handler
-func Index(w http.ResponseWriter, r *http.Request) {
+// IndexHandler site handler
+func IndexHandler(w http.ResponseWriter, r *http.Request) {
 	state := r.URL.Query().Get("state")
 	// Callback "URL" from Google auth
 	if state == "state-token" {
 		code := r.URL.Query().Get("code")
-		authToken, err := oauth.GetTokenFromCode(code)
+		authToken, err := gcal.GetTokenFromCode(code)
 		if err != nil {
 			http.Error(w, "Error retrieving auth token", http.StatusInternalServerError)
 			return
@@ -55,14 +57,27 @@ func Index(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	var calendars []*calendar.CalendarListEntry
+	if authToken.Valid() {
+		var err error
+		calendars, err = gcal.ListCalendars(authToken)
+		if err != nil {
+			fmt.Println(err)
+			calendars = []*calendar.CalendarListEntry{}
+		}
+		fmt.Println(calendars)
+	}
+
 	data := struct {
-		Title   string
-		IsAuth  bool
-		AuthURL string
+		Title     string
+		IsAuth    bool
+		AuthURL   string
+		Calendars []*calendar.CalendarListEntry
 	}{
-		Title:   "Testausbulkkikalendar",
-		IsAuth:  authToken.Valid(),
-		AuthURL: authURL,
+		Title:     "Testausbulkkikalendar",
+		IsAuth:    authToken.Valid(),
+		AuthURL:   authURL,
+		Calendars: calendars,
 	}
 
 	// Render the "index.html" template

@@ -4,12 +4,12 @@ import (
 	"log"
 	"net/http"
 	"testausserveri/testausbulkkikalendar/constants"
+	"testausserveri/testausbulkkikalendar/gcal"
 	"testausserveri/testausbulkkikalendar/handlers"
-	"testausserveri/testausbulkkikalendar/oauth"
 )
 
 func main() {
-	oauth.Init()
+	gcal.Init()
 
 	// Parse all templates in the templates directory
 	handlers.Init("./templates")
@@ -21,8 +21,8 @@ func main() {
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 
 	// Define the handlers
-	http.Handle("/", handlers.AuthCheck(http.HandlerFunc(handlers.Index)))
-	http.HandleFunc("/query", handlers.Index)
+	http.Handle("/", handlers.AuthCheck(http.HandlerFunc(handlers.IndexHandler)))
+	http.Handle("/query", handlers.AuthCheck(http.HandlerFunc(handlers.QueryHandler)))
 
 	// Start the server
 	log.Println("Server listening on :" + constants.PORT)
